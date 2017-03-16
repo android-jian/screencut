@@ -2,6 +2,7 @@ package com.jian.android.screencut;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -9,6 +10,7 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.view.WindowManager;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -21,7 +23,7 @@ import java.util.ArrayList;
 import cn.sharesdk.framework.ShareSDK;
 import cn.sharesdk.onekeyshare.OnekeyShare;
 
-public class ScreenCutActivity extends AppCompatActivity {
+public class ScreenCutActivity extends AppCompatActivity implements View.OnClickListener{
 
     private ImageView imageView;
     private RecyclerView mRecycler;
@@ -31,6 +33,12 @@ public class ScreenCutActivity extends AppCompatActivity {
     private ImageView iv_icon_show;
     private EditText et_input;
     private Toolbar toolbar;
+    private ImageView mOne;
+    private ImageView mTwo;
+    private ImageView mThree;
+    private MyAdapter myAdapter;
+    private int[] idTwos;
+    private int[] idThrees;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,6 +54,14 @@ public class ScreenCutActivity extends AppCompatActivity {
         iv_icon_show = (ImageView) findViewById(R.id.iv_icon_show);
         mRecycler = (RecyclerView) findViewById(R.id.recycler_view);
         et_input = (EditText) findViewById(R.id.et_input);
+
+        mOne= (ImageView) findViewById(R.id.iv_one);
+        mTwo = (ImageView) findViewById(R.id.iv_two);
+        mThree = (ImageView) findViewById(R.id.iv_three);
+
+        mOne.setOnClickListener(this);
+        mTwo.setOnClickListener(this);
+        mThree.setOnClickListener(this);
 
         //禁止软键盘弹出
         getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
@@ -64,13 +80,18 @@ public class ScreenCutActivity extends AppCompatActivity {
         initData();
 
         initView();
-
     }
 
     public void initData(){
 
         iconIds = new int[]{R.drawable.a,R.drawable.b,R.drawable.c,R.drawable.d,R.drawable.e,
                 R.drawable.f,R.drawable.g,R.drawable.h,R.drawable.i,R.drawable.j,R.drawable.k,R.drawable.l};
+
+        idTwos = new int[]{R.drawable.ya,R.drawable.yb,R.drawable.yc,R.drawable.yd,R.drawable.ye,
+                R.drawable.yf,R.drawable.yg,R.drawable.yh,R.drawable.yi,R.drawable.yj,R.drawable.yk,R.drawable.yl};
+
+        idThrees = new int[]{R.drawable.za,R.drawable.zb,R.drawable.zc,R.drawable.zd,R.drawable.ze,
+                R.drawable.zf,R.drawable.zg,R.drawable.zh,R.drawable.zi,R.drawable.zj,R.drawable.zk,R.drawable.zl};
 
         String[] iconDes=new String[]{"我读书少，你可别骗我","知道真相的我眼泪流下来","感觉不会再爱了"
                 ,"分分钟又涨姿势了","我裤子都脱了，你就给我看这个","心里默默点个赞","该吃药了","不明觉厉"
@@ -100,9 +121,60 @@ public class ScreenCutActivity extends AppCompatActivity {
         LinearLayoutManager layoutManager=new LinearLayoutManager(this);
         layoutManager.setOrientation(LinearLayout.HORIZONTAL);
         mRecycler.setLayoutManager(layoutManager);
-        mRecycler.setAdapter(new MyAdapter(mDatas,iv_icon_show,et_input));
+
+        myAdapter = new MyAdapter(mDatas,iv_icon_show,et_input);
+
+        mRecycler.setAdapter(myAdapter);
     }
 
+    @Override
+    public void onClick(View v) {
+
+        switch (v.getId()){
+
+            case R.id.iv_one:
+
+                if (!(mDatas.get(0).mIconId==iconIds[0])){         //避免重复刷新数据  只有切换操作才会进行数据刷新
+
+                    for (int i=0;i<mDatas.size();i++){
+                        mDatas.get(i).mIconId=iconIds[i];
+                        mDatas.get(i).isSelected=false;
+                    }
+                    myAdapter.notifyDataSetChanged();
+                }
+
+                break;
+
+            case R.id.iv_two:
+
+                if (!(mDatas.get(0).mIconId==idTwos[0])){
+
+                    for (int i=0;i<mDatas.size();i++){
+                        mDatas.get(i).mIconId=idTwos[i];
+                        mDatas.get(i).isSelected=false;
+                    }
+                    myAdapter.notifyDataSetChanged();
+                }
+
+                break;
+
+            case R.id.iv_three:
+
+                if (!(mDatas.get(0).mIconId==idThrees[0])){
+
+                    for (int i=0;i<mDatas.size();i++){
+                        mDatas.get(i).mIconId=idThrees[i];
+                        mDatas.get(i).isSelected=false;
+                    }
+                    myAdapter.notifyDataSetChanged();
+                }
+
+                break;
+
+            default:
+                break;
+        }
+    }
 
     private void showShare() {
         ShareSDK.initSDK(this);

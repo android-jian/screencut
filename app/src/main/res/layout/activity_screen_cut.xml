@@ -68,6 +68,11 @@
 
     </FrameLayout>
 
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.4dp"
+        android:background="#666666"/>
+
     <android.support.v7.widget.RecyclerView
         android:id="@+id/recycler_view"
         android:layout_width="match_parent"
@@ -76,5 +81,62 @@
         android:layout_marginTop="10dp">
 
     </android.support.v7.widget.RecyclerView>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.4dp"
+        android:background="#666666"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:orientation="horizontal"
+        android:gravity="center_horizontal">
+
+        <View
+            android:layout_width="0.4dp"
+            android:layout_height="match_parent"
+            android:background="#666666"/>
+
+        <ImageView
+            android:id="@+id/iv_one"
+            android:layout_width="60dp"
+            android:layout_height="30dp"
+            android:src="@drawable/ys"
+            android:padding="4dp"
+            android:clickable="true"/>
+
+        <View
+            android:layout_width="0.4dp"
+            android:layout_height="match_parent"
+            android:background="#666666"/>
+
+        <ImageView
+            android:id="@+id/iv_two"
+            android:layout_width="60dp"
+            android:layout_height="30dp"
+            android:src="@drawable/yt"
+            android:padding="4dp"
+            android:clickable="true"/>
+
+        <View
+            android:layout_width="0.4dp"
+            android:layout_height="match_parent"
+            android:background="#666666"/>
+
+        <ImageView
+            android:id="@+id/iv_three"
+            android:layout_width="60dp"
+            android:layout_height="30dp"
+            android:src="@drawable/yu"
+            android:padding="4dp"
+            android:clickable="true"/>
+
+        <View
+            android:layout_width="0.4dp"
+            android:layout_height="match_parent"
+            android:background="#666666"/>
+
+    </LinearLayout>
 
 </LinearLayout>

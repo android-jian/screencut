@@ -15,6 +15,7 @@
         app:popupTheme="@style/ThemeOverlay.AppCompat.Light"/>
 
     <FrameLayout
+        android:id="@+id/fl_show"
         android:layout_width="250dp"
         android:layout_height="420dp"
         android:layout_gravity="center_horizontal"
@@ -71,7 +72,8 @@
     <View
         android:layout_width="match_parent"
         android:layout_height="0.4dp"
-        android:background="#666666"/>
+        android:background="#666666"
+        android:layout_marginTop="5dp"/>
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/recycler_view"
@@ -104,7 +106,8 @@
             android:layout_height="30dp"
             android:src="@drawable/ys"
             android:padding="4dp"
-            android:clickable="true"/>
+            android:clickable="true"
+            android:background="#CCCCCC"/>
 
         <View
             android:layout_width="0.4dp"
